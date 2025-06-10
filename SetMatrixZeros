@@ -1,0 +1,37 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        set<int> rows;
+        set<int> cols;
+
+        // First pass: mark rows and columns to be zeroed
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(matrix[i][j] == 0) {
+                    rows.insert(i);
+                    cols.insert(j);
+                }
+            }
+        }
+
+        // Second pass: set rows to zero
+        for(int i = 0; i < m; i++) {
+            if(rows.count(i)) {
+                for(int j = 0; j < n; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Third pass: set columns to zero
+        for(int j = 0; j < n; j++) {
+            if(cols.count(j)) {
+                for(int i = 0; i < m; i++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+};
